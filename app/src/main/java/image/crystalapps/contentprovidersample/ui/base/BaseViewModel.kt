@@ -1,0 +1,33 @@
+package image.crystalapps.contentprovidersample.ui.base
+
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.lifecycle.ViewModel
+import java.lang.ref.WeakReference
+
+
+abstract class BaseViewModel<N>  constructor(val baseDataManager : BaseRepository) :  ViewModel(){
+
+
+
+    lateinit var  mNavigator  : WeakReference<N>
+
+    fun setNavigator(mNavigator :N){
+        this.mNavigator = WeakReference<N>(mNavigator)
+    }
+
+    open fun getNavigator() :N{
+
+        return mNavigator.get()!!
+    }
+
+
+    public fun navigate(context : Context?, activityClass: Class<out Activity>?){
+
+        context?.startActivity(Intent(context, activityClass))
+
+
+    }
+
+}

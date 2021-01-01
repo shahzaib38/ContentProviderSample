@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ContentProviderSample</string>
+    <string name="draw_pattern">Draw unlock pattern</string>
+    <string name="correct_pattern">Unlocked</string>
+    <string name="incorrect_pattern">Incorrect Pattern Drawn</string>
+    <string name="black_pattern">""</string>
+    <string name="share">Share</string>
+    <string name="set_wallpaper">Set as wallpaper</string>
+    <string name="photo">Photo</string>
+    <string name="videos">Videos</string>
+    <string name="settings">Settings</string>
+    <string name="images">Images</string>
+    <string name="albums">Albums</string>
+    <string name="page_title">Photos</string>
+    <string name="details">Details</string>
+</resources>

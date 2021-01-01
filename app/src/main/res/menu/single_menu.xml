@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:id="@+id/share"
+        android:title="@string/share"
+        android:icon="@drawable/share_icon"
+        android:orderInCategory="101"
+        app:showAsAction="ifRoom"
+        />
+
+
+    <item
+        android:id="@+id/wallpaper"
+        android:title="@string/set_wallpaper"
+        android:orderInCategory="102"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/details"
+        android:title="@string/details"
+        android:orderInCategory="103"
+        app:showAsAction="never"
+        />
+
+
+</menu>
