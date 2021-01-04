@@ -6,7 +6,6 @@ import android.provider.MediaStore
 import androidx.loader.content.Loader
 import image.crystalapps.contentprovidersample.common.ImageContract
 import image.crystalapps.contentprovidersample.entities.Image
-import image.crystalapps.contentprovidersample.extensions.retrieveAllData
 import image.crystalapps.contentprovidersample.extensions.retrieveImages
 
 
@@ -23,6 +22,10 @@ abstract class OnPhotoLoaderCallBack :BaseLoaderCallBack<List<Image>>() {
     }
 
 
+
+    override fun getSortOrderSql(): String? {
+        return ImageContract.DATE + " DESC"
+    }
 
     override fun getQueryUri(): Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 

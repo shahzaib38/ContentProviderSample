@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.databinding.ImageSelectDataBinding
+import image.crystalapps.contentprovidersample.entities.Image
 import image.crystalapps.contentprovidersample.ui.base.BaseFragment
 import image.crystalapps.contentprovidersample.ui.singleimage.SingleImageActivity
 import image.crystalapps.contentprovidersample.ui.singleimage.SingleViewModel
@@ -26,10 +27,10 @@ class ImageFragmentSelect : BaseFragment<SingleViewModel, ImageSelectDataBinding
         private const val IMAGE = "image"
         private var imageSelectDataBinding : ImageSelectDataBinding?=null
 
-        fun newInstance(image: String?): ImageFragmentSelect {
+        fun newInstance(image: Image?): ImageFragmentSelect {
             val fragment = ImageFragmentSelect()
             val args = Bundle()
-            args.putString(IMAGE, image)
+            args.putParcelable(IMAGE, image)
             fragment.arguments = args
             return fragment
         }
@@ -42,8 +43,9 @@ class ImageFragmentSelect : BaseFragment<SingleViewModel, ImageSelectDataBinding
         super.onViewCreated(view, savedInstanceState)
 
         imageSelectDataBinding = getViewDataBinding()
-        val images=      arguments?.let { it.get(IMAGE) }
-        imageSelectDataBinding?.imagedata?.setImageURI(Uri.parse(images.toString()))
+        val images=      arguments?.let { it.getParcelable<Image>(IMAGE) }
+
+        imageSelectDataBinding?.imagedata?.setImageURI(Uri.parse(images?.uriImage))
 
         if(getBaseActivity() is SingleImageActivity) {
             mSingleImageActivity = getBaseActivity() as SingleImageActivity

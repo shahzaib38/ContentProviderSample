@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ContentProviderSample</string>
+    <string name="app_name">Private Gallery</string>
     <string name="draw_pattern">Draw unlock pattern</string>
     <string name="correct_pattern">Unlocked</string>
     <string name="incorrect_pattern">Incorrect Pattern Drawn</string>
@@ -13,4 +13,8 @@
     <string name="albums">Albums</string>
     <string name="page_title">Photos</string>
     <string name="details">Details</string>
+    <string name="disable">Disable</string>
+    <string name="auto">Auto</string>
 </resources>
+
+

@@ -9,35 +9,40 @@ import com.bumptech.glide.Glide
 import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.databinding.ImageItemDataBinding
 import image.crystalapps.contentprovidersample.databinding.VideoItemDataBinding
+import image.crystalapps.contentprovidersample.entities.Video
 import image.crystalapps.contentprovidersample.ui.mainactivity.fragments.videos.VideosFragment
 
 
-val  diffUtilVideos =object : DiffUtil.ItemCallback<String>() {
-    override fun areItemsTheSame(oldItem: String, newItem:String): Boolean {
+val  diffUtilVideos =object : DiffUtil.ItemCallback<Video>() {
+    override fun areItemsTheSame(oldItem: Video, newItem:Video): Boolean {
         return false
     }
 
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+    override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean {
 
         return false
     }
 }
 
 
-class VideoAdapter(private val videosFragment : VideosFragment) :BaseAdapter<String, VideoItemDataBinding>(diffUtilVideos){
+class VideoAdapter(private val videosFragment : VideosFragment) :BaseAdapter<Video, VideoItemDataBinding>(diffUtilVideos){
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int
     ): VideoItemDataBinding = DataBindingUtil.inflate(inflater , R.layout.video_item,parent ,false)
 
 
-    override fun bind(binding: VideoItemDataBinding, item: String,position:Int) {
-        Glide.with(binding.root).load(Uri.parse(item)).into(binding.singleImageView)
+    override fun bind(binding: VideoItemDataBinding, item: Video,position:Int) {
+        Glide.with(binding.root).load(Uri.parse(item.uriImage)).into(binding.singleImageView)
 
         binding.singleImageView.setOnClickListener {
-//            photoFragment.clickItem(it ,item)
+            videosFragment.clickItem(it ,currentList.toList(),position)
+
         }
     }
 
+
+
+
     override fun onDataChanged(values: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

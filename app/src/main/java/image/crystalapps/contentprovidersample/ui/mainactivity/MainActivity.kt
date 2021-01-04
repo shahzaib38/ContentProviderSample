@@ -60,7 +60,8 @@ class MainActivity : BaseActivity<MainViewModel, MainActivityDataBinding>() ,OnI
 
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
-        val navGraphIds = listOf(R.navigation.photo_nav, R.navigation.albums_nav ,R.navigation.video_nav)
+//        val navGraphIds = listOf(R.navigation.photo_nav, R.navigation.albums_nav ,R.navigation.video_nav)
+        val navGraphIds = listOf(R.navigation.photo_nav ,R.navigation.video_nav)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

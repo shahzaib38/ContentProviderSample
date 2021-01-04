@@ -2,19 +2,16 @@ package image.crystalapps.contentprovidersample
 
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
 import androidx.lifecycle.*
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import image.crystalapps.contentprovidersample.callbacks.OnPhotoLoaderCallBack
 import image.crystalapps.contentprovidersample.entities.Image
 import image.crystalapps.contentprovidersample.loader.LoaderManagerCallBack
-import image.crystalapps.contentprovidersample.ui.mainactivity.MainActivity
 import image.crystalapps.contentprovidersample.ui.mainactivity.fragments.photo.PhotoFragment
 import kotlinx.coroutines.*
 
 class PhotoLoader private constructor(private  val context :Context){
-
 
     val photosLiveData = MutableLiveData<List<Image>?>(emptyList())
 

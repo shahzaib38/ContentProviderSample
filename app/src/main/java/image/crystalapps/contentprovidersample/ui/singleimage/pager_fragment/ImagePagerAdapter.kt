@@ -13,7 +13,7 @@ class ImagePagerAdapter(private val fragmentManager: FragmentManager) : Fragment
     private var imageList :List<Image> = emptyList()
 
     override fun getItem(position: Int): Fragment {
-        return ImageFragmentSelect.newInstance(imageList[position].toString()) }
+        return ImageFragmentSelect.newInstance(imageList[position]) }
 
     override fun getCount(): Int {
 

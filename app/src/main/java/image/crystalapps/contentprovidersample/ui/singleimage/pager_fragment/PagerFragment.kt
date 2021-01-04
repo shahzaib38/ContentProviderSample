@@ -1,17 +1,23 @@
 package image.crystalapps.contentprovidersample.ui.singleimage.pager_fragment
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.VisibleForTesting
-import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.R
+import image.crystalapps.contentprovidersample.common.ContentProviderUtils
+import image.crystalapps.contentprovidersample.common.ContentProviderUtils.IMAGES_TYPE
+import image.crystalapps.contentprovidersample.common.ContentProviderUtils.VIDEO_TYPES
 import image.crystalapps.contentprovidersample.databinding.PagerDataBinding
 import image.crystalapps.contentprovidersample.entities.Image
+import image.crystalapps.contentprovidersample.entities.Video
 import image.crystalapps.contentprovidersample.ui.base.BaseFragment
 import image.crystalapps.contentprovidersample.ui.singleimage.SingleViewModel
+import image.crystalapps.contentprovidersample.ui.singlevideo.pager_fragment.VideoPagerAdapter
 import kotlinx.android.synthetic.main.pager_fragment.*
 
 @AndroidEntryPoint
@@ -35,17 +41,28 @@ class PagerFragment :BaseFragment<SingleViewModel, PagerDataBinding>() {
 
         @VisibleForTesting
         const val  IMAGES ="images"
-          const val SELECT_POSITION="Select_Position"
+        const val VIDEOS="videos"
+        const val SELECT_POSITION="Select_Position"
 
-        fun getInstance(imagesList :ArrayList<Image>, selectedPosition :Int): PagerFragment {
+        const val COMMON_TYPE="common_type"
+
+        fun <T : Parcelable> getInstance(imagesList :ArrayList<T>, selectedPosition :Int , mediaType :String): PagerFragment {
             val fragment = PagerFragment()
-            val args = Bundle()
-            args.putParcelableArrayList(IMAGES, imagesList)
-            args.putInt(SELECT_POSITION,selectedPosition)
-            fragment.arguments = args
-            return fragment
+            if(mediaType== IMAGES_TYPE) {
+                val args = Bundle()
+                args.putString(COMMON_TYPE,mediaType)
+                args.putParcelableArrayList(IMAGES, imagesList)
+                args.putInt(SELECT_POSITION, selectedPosition)
+                fragment.arguments = args
+            }else if(mediaType == VIDEO_TYPES){
+                val args = Bundle()
+                args.putString(COMMON_TYPE,mediaType)
+                args.putParcelableArrayList(VIDEOS, imagesList)
+                args.putInt(SELECT_POSITION, selectedPosition)
+                fragment.arguments = args
+            }
 
-        }
+            return fragment }
     }
 
 
@@ -57,25 +74,57 @@ class PagerFragment :BaseFragment<SingleViewModel, PagerDataBinding>() {
 
         var selectedPosition = 0
         arguments?.let {
-            product = it.getParcelableArrayList<Image>(IMAGES)
             selectedPosition =it.getInt(SELECT_POSITION)
+            val mediaType =it.getString(COMMON_TYPE)
+
+           if(mediaType!=null){
+
+               if(mediaType==IMAGES_TYPE){
+                 val  product = it.getParcelableArrayList<Image>(IMAGES)
+
+                   setImageAdapter(selectedPosition ,product)
+
+               }else if(mediaType==VIDEO_TYPES){
+                   val  product = it.getParcelableArrayList<Video>(VIDEOS)
+
+                   setVideoAdapter(selectedPosition ,product)
+
+               }
+
+           }
+
 
 
         }?: throw NullPointerException("Argument is null")
 
 
-        adapter = ImagePagerAdapter(childFragmentManager)
 
+
+
+    }
+
+    fun setVideoAdapter(selectedPosition: Int , product : List<Video>?){
+       val adapter = VideoPagerAdapter(childFragmentManager)
         product?.run {
             adapter.submitItem(this)
         }?: throw NullPointerException("Image PAger Adapter is null")
+
         pager.adapter = adapter
 
         pager.currentItem = selectedPosition
 
 
+    }
 
+    fun setImageAdapter(selectedPosition: Int , product : List<Image>?){
+      val  adapter = ImagePagerAdapter(childFragmentManager)
+        product?.run {
+            adapter.submitItem(this)
+        }?: throw NullPointerException("Image PAger Adapter is null")
 
+        pager.adapter = adapter
+
+        pager.currentItem = selectedPosition
     }
 
 }

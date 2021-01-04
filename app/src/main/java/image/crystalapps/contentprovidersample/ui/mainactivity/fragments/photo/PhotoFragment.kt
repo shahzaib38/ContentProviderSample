@@ -136,7 +136,10 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
         intent.putExtra("Select_Position",selectPosition)
         intent.putParcelableArrayListExtra("images_list", ArrayList<Image>(item))
 
-        ActivityCompat.startActivity(requireContext(), intent, activityOption.toBundle()) }
+        ActivityCompat.startActivity(requireContext(), intent, activityOption.toBundle())
+
+
+    }
 
 
     override fun onResume() {

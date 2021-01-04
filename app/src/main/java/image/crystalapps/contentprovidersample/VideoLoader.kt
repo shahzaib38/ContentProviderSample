@@ -11,6 +11,7 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import image.crystalapps.contentprovidersample.callbacks.OnPhotoLoaderCallBack
 import image.crystalapps.contentprovidersample.callbacks.OnVideoLoaderCallback
+import image.crystalapps.contentprovidersample.entities.Video
 import image.crystalapps.contentprovidersample.loader.LoaderManagerCallBack
 import image.crystalapps.contentprovidersample.ui.mainactivity.fragments.videos.VideosFragment
 import kotlinx.coroutines.*
@@ -18,7 +19,7 @@ import kotlinx.coroutines.*
 class VideoLoader private constructor(private  val context :Context){
 
 
-    val videosLiveData = MutableLiveData<List<String>?>(emptyList())
+    val videosLiveData = MutableLiveData<List<Video>?>(emptyList())
 
     lateinit var loaderCursor : Loader<Cursor>
     fun init(owner: VideosFragment){
@@ -31,9 +32,11 @@ class VideoLoader private constructor(private  val context :Context){
 
 
     private val photoManager = object : OnVideoLoaderCallback() {
-        override fun onResult(result: List<String>) {
+        override fun onResult(result: List<Video>) {
+
             runBlocking(Dispatchers.Main) {
                 setLiveData(result)
+
 
             } }
 
@@ -44,7 +47,7 @@ class VideoLoader private constructor(private  val context :Context){
     }
 
 
-    fun setLiveData(result :List<String>?){
+    fun setLiveData(result :List<Video>?){
         videosLiveData.value=result }
 
 

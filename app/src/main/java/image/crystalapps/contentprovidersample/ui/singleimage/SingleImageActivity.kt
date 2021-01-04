@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.R
+import image.crystalapps.contentprovidersample.common.ContentProviderUtils
 import image.crystalapps.contentprovidersample.databinding.SingleImageDataBinding
 import image.crystalapps.contentprovidersample.entities.Image
 import image.crystalapps.contentprovidersample.ui.base.BaseActivity
@@ -77,7 +78,7 @@ class SingleImageActivity :BaseActivity<SingleViewModel,SingleImageDataBinding>(
 
     private fun setUpPagerFragment(products: ArrayList<Image>,selectPosition :Int){
 
-        val pagerFragment=    PagerFragment.getInstance(products , selectPosition)
+        val pagerFragment=    PagerFragment.getInstance(products , selectPosition,ContentProviderUtils.IMAGES_TYPE)
         pagerFragment.run {
             supportFragmentManager.beginTransaction().replace(R.id.multiImageContainer ,this).commit() }
 

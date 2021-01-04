@@ -15,32 +15,6 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-
-        <!--        <com.google.android.material.appbar.AppBarLayout-->
-        <!--        android:id="@+id/appBarLayout"-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="200dp"-->
-        <!--        app:liftOnScroll="true"-->
-        <!--            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-        <!--        android:fitsSystemWindows="true">-->
-
-        <!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
-        <!--            android:id="@+id/collapsing_toolbar"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:fitsSystemWindows="true"-->
-        <!--            app:contentScrim="?attr/colorPrimary"-->
-        <!--            app:expandedTitleMarginEnd="64dp"-->
-        <!--            app:expandedTitleMarginStart="48dp"-->
-        <!--            app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
-        <!--            <ImageView-->
-        <!--                android:id="@+id/imageview"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                app:layout_collapseMode="parallax"-->
-        <!--                android:src="@drawable/ic_launcher_foreground"/>-->
-
         <com.google.android.material.appbar.MaterialToolbar
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:id="@+id/main_toolbar"

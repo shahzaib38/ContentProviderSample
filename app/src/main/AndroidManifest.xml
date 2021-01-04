@@ -3,8 +3,12 @@
     package="image.crystalapps.contentprovidersample">
 
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,15 +25,12 @@
 <!--            android:permission="com.example.android.contentprovidersample.provider.READ_WRITE"/>-->
 
         <activity android:name=".ui.mainactivity.MainActivity"
-            android:theme="@style/Theme.Design.NoActionBar"
-            >
+            android:theme="@style/Theme.Design.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <activity android:name=".ui.settings.SettingsActivity"/>
@@ -37,9 +38,18 @@
 
         <activity android:name=".ui.singleimage.SingleImageActivity"/>
 
-        <activity android:name=".ui.pattern.PatternActivity">
+        <activity android:name=".ui.pattern.PatternActivity"></activity>
+
+        <activity android:name=".ui.singlevideo.SingleVideoPlayer">
+
 
         </activity>
+        <service
+            android:name=".services.MediaService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
+
     </application>
 
 </manifest>

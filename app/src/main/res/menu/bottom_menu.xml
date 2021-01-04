@@ -11,10 +11,10 @@
 
     <!--    android:contentDescription="@string/cd_list"-->
 
-    <item android:id="@+id/albums"
-        android:title="@string/albums"
-    android:icon="@drawable/album_icon"
-        />
+<!--    <item android:id="@+id/albums"-->
+<!--        android:title="@string/albums"-->
+<!--    android:icon="@drawable/album_icon"-->
+<!--        />-->
 
 
     <item
