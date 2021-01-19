@@ -15,6 +15,9 @@
     <string name="details">Details</string>
     <string name="disable">Disable</string>
     <string name="auto">Auto</string>
+    <string name="speak_now">Speak Now</string>
+    <string name="pictures">Pictures</string>
+    <string name="description">Security type</string>
 </resources>
 
 

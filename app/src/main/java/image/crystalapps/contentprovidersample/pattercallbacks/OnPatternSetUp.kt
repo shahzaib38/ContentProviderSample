@@ -3,7 +3,7 @@ package image.crystalapps.contentprovidersample.pattercallbacks
 import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.utils.PatternLockUtils
 
-abstract class OnPatternSetUpCallBacks :BasePatternCallBacks {
+abstract class OnPatternSetUp :IPattern {
 
 
     fun onFinished(lockPreview :PatternLockView  ,pattern : MutableList<PatternLockView.Dot>){

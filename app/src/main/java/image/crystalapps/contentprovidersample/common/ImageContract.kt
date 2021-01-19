@@ -16,8 +16,12 @@ object ImageContract {
 
 
 
-fun getAbsoluteUriPath(imageId :Long) :Uri{
- return   Uri.withAppendedPath(CONTENT_URI, "" + imageId)
 
-}
+
+
+     fun getListOfImages() :Array<String> = arrayOf(DISLAY_NAME,_ID,DATE,WIDTH, SIZE,HEIGHT,PATH)
+
+
+
+
 }

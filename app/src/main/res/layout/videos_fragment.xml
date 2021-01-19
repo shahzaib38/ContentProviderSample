@@ -2,11 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data
-        class="VideosDataBinding"
-        >
-
-    </data>
+    <data class="VideosDataBinding"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -20,23 +16,28 @@
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             app:layout_collapseMode="pin"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorBackgroundLight"
+            app:title="@string/videos"
+            app:titleTextColor="@color/toolbarTextColor"
+            android:background="@color/white"
+            android:layout_height="?attr/actionBarSize" />
 
-            />
 
-        <!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
-
-        <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/image_recyclerVIew"
-            android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
             />
+
+
+<!--            </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+
+
 
     </LinearLayout>
 

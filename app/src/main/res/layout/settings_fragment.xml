@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="SettingsDataBinding">
+
+        <variable
+            name="viewModel"
+            type="image.crystalapps.contentprovidersample.ui.mainactivity.fragments.settings.SettingsViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        >
+        <com.google.android.material.appbar.MaterialToolbar
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            app:title="@string/settings"
+            app:titleTextColor="@color/toolbarTextColor"
+            android:background="@color/white"
+            android:layout_height="?attr/actionBarSize" />
+    </LinearLayout>
+</layout>

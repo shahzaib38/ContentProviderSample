@@ -1,7 +1,9 @@
 package image.crystalapps.contentprovidersample
 
+import android.app.Activity
 import android.content.Context
 import android.database.Cursor
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -18,7 +20,9 @@ class PhotoLoader private constructor(private  val context :Context){
     lateinit var loaderCursor : Loader<Cursor>
     fun init(owner: PhotoFragment){
         val loader = LoaderManagerCallBack(context, photoManager)
-        loaderCursor= LoaderManager.getInstance(owner).initLoader(IMAGES_LOADER, null, loader)
+
+
+        loaderCursor= LoaderManager.getInstance(owner).restartLoader(IMAGES_LOADER, null, loader)
 
     }
 
@@ -40,11 +44,16 @@ class PhotoLoader private constructor(private  val context :Context){
             runBlocking(Dispatchers.Main) {
                 setLiveData(result)
 
-            } }
+            }
+
+
+
+        }
 
 
         override fun onReset(loader: Loader<Cursor>) {
-           // setLiveData(null)
+
+
         }
     }
 
@@ -58,6 +67,15 @@ class PhotoLoader private constructor(private  val context :Context){
 
         fun getInstance(context: Context):PhotoLoader{
             return PhotoLoader(context) }
+
+        class Builder<T> {
+
+            fun setQuery(): Builder<T> {
+
+
+                return this
+            }
+        }
     }
 
 

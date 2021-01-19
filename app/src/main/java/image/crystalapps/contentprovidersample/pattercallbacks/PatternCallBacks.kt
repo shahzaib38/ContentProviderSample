@@ -3,7 +3,7 @@ package image.crystalapps.contentprovidersample.pattercallbacks
 import com.andrognito.patternlockview.PatternLockView
 import com.andrognito.patternlockview.listener.PatternLockViewListener
 
- class PatternCallBacks private  constructor(private val lockPreview :PatternLockView ,private val onPatternSetUpCallBacks:OnPatternSetUpCallBacks) :PatternLockViewListener {
+ class PatternCallBacks private  constructor(private val lockPreview :PatternLockView ,private val onPatternSetUpCallBacks:OnPatternSetUp) :PatternLockViewListener {
 
 
     override fun onComplete(pattern: MutableList<PatternLockView.Dot>?) {
@@ -18,7 +18,7 @@ import com.andrognito.patternlockview.listener.PatternLockViewListener
 
     }
 
-    override fun onStarted() {
+        override fun onStarted() {
 
     }
 
@@ -33,7 +33,7 @@ import com.andrognito.patternlockview.listener.PatternLockViewListener
 
     companion object{
 
-        fun getInstance( lockPreview :PatternLockView , onPatternSetUpCallBacks:OnPatternSetUpCallBacks):PatternLockViewListener{
+        fun getInstance( lockPreview :PatternLockView , onPatternSetUpCallBacks:OnPatternSetUp):PatternLockViewListener{
            return PatternCallBacks(lockPreview,onPatternSetUpCallBacks) }
 
     }

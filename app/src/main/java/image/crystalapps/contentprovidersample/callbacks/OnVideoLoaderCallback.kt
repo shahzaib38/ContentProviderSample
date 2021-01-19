@@ -33,14 +33,7 @@ abstract class OnVideoLoaderCallback : BaseLoaderCallBack<List<Video>>() {
         return VideoContract.DATE + " DESC"
     }
 
-    override fun getSelectProjection(): Array<String> {
-      return  arrayOf(VideoContract.DISLAY_NAME, VideoContract._ID
-      ,VideoContract.DATE
-       , VideoContract.SIZE,
-        VideoContract.WIDTH,
-        ImageContract.HEIGHT,
-        VideoContract.PATH)
-    }
+    override fun getSelectProjection(): Array<String> = VideoContract.getVideoList()
 
     override fun getQueryUri(): Uri =MediaStore.Video.Media.EXTERNAL_CONTENT_URI
 

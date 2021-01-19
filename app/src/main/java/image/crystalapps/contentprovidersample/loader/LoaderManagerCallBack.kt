@@ -22,10 +22,7 @@ class LoaderManagerCallBack(private val context :Context , private val onLoaderC
 
 
       fun reset(){
-
-        this.onLoaderCallBack.onLoaderReset()
-
-    }
+          this.onLoaderCallBack.onLoaderReset() }
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
         println("OnLoader Finished")

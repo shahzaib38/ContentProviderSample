@@ -3,7 +3,7 @@ package image.crystalapps.contentprovidersample.pattercallbacks
 import com.andrognito.patternlockview.PatternLockView
 
 
-interface  BasePatternCallBacks {
+interface  IPattern {
 
     fun onCorrect()
 

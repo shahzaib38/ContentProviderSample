@@ -31,6 +31,11 @@ class VideoAdapter(private val videosFragment : VideosFragment) :BaseAdapter<Vid
 
 
     override fun bind(binding: VideoItemDataBinding, item: Video,position:Int) {
+
+        binding?.run {
+            this.video =item }
+
+
         Glide.with(binding.root).load(Uri.parse(item.uriImage)).into(binding.singleImageView)
 
         binding.singleImageView.setOnClickListener {

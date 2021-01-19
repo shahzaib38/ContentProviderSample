@@ -10,9 +10,13 @@ class Video(var id :Long? ,
             var size :String?,
             var width :String?,
             var height :String?,
-            var path :String?) : Parcelable {
+            var path :String?,
+            var thumb :String?
+            ,var duration: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -32,6 +36,8 @@ class Video(var id :Long? ,
         parcel.writeString(width)
         parcel.writeString(height)
         parcel.writeString(path)
+        parcel.writeString(thumb)
+        parcel.writeString(duration)
     }
 
     override fun describeContents(): Int {

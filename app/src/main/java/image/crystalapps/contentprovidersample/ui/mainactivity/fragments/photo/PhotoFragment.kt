@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -25,6 +26,7 @@ import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.adapter.ImageAdapter
 import image.crystalapps.contentprovidersample.databinding.PhotoDataBinding
 import image.crystalapps.contentprovidersample.entities.Image
+import image.crystalapps.contentprovidersample.entities.Permissions
 import image.crystalapps.contentprovidersample.listerner.OnItemClickListener
 import image.crystalapps.contentprovidersample.listerner.OnPhotoItemClickListener
 import image.crystalapps.contentprovidersample.ui.base.BaseFragment
@@ -60,7 +62,12 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
 
      mPhotoDataBinding =    getViewDataBinding()
 
-        if (hasPermissions(requireContext(), EXTERNAL_STORAGE_ARRAY))
+
+    val window=    requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.statusBarColor=resources.getColor(R.color.white,null)
+
+        if (Permissions.hasPermissions(requireContext(), EXTERNAL_STORAGE_ARRAY))
         { loadDataFromStorage() }
         else{ requestCameraPermission() }
 
@@ -73,20 +80,7 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
             EXTERNAL_STORAGE_PERMISSION
         ) }
 
-    private fun hasPermissions(context: Context?, permissions: Array<String?>?): Boolean {
-        if (context != null && permissions != null) {
-            for (permission in permissions) {
-                if (ContextCompat.checkSelfPermission(
-                        context,
-                        permission!!
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    return false
-                }
-            }
-        }
-        return true
-    }
+
     private   fun loadDataFromStorage(){
 
         lifecycleScope.launch {
@@ -94,12 +88,13 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
             photoProvider.init(this@PhotoFragment)
             photoProvider.photosLiveData.observe(viewLifecycleOwner, Observer { result ->
 
-                println("Photo Fragment ${result}")
                 val imageAdapter = ImageAdapter(this@PhotoFragment)
                 if (result!=null && result.isNotEmpty()  ) {
                     imageAdapter.submitList(result)
 
                     mPhotoDataBinding?.imageRecyclerVIew?.run {
+
+
                         this.layoutManager = GridLayoutManager(requireContext(), 2)
                         this.adapter = imageAdapter
                         this.isNestedScrollingEnabled = false } } }) }
@@ -107,39 +102,48 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
         if (requestCode == EXTERNAL_STORAGE_PERMISSION) {
+
+
             if (grantResults.isNotEmpty()) {
+
                 val cameraPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED
                 if (cameraPermission ) {
                     loadDataFromStorage()
-
                 } else {
                     requireActivity().finish()
                     Toast.makeText(requireContext() ,"Permission Denied" , Toast.LENGTH_LONG).show()
                 }
             }
+
         }
+
+
     }
 
 
     override fun clickItem(view: View, item: List<Image>, selectPosition: Int) {
+        animate(view,item,selectPosition) }
+
+
+    fun animate(view: View, item: List<Image>, selectPosition: Int){
+
         val activityOption = ActivityOptionsCompat.makeSceneTransitionAnimation(
             requireActivity(),
-            Pair(
-                view.findViewById<ImageView>(R.id.singleImageView),
-                SingleImageActivity.IMAGE_HEADER))
+            Pair(view.findViewById<ImageView>(R.id.singleImageView), SingleImageActivity.IMAGE_HEADER))
 
+        val intent =initalntent(item ,selectPosition)
+        ActivityCompat.startActivity(requireContext(), intent, activityOption.toBundle())
+
+    }
+
+    fun initalntent(item: List<Image>, selectPosition: Int):Intent{
         val intent = Intent(requireActivity(), SingleImageActivity::class.java)
-
-        Toast.makeText(requireContext() ,selectPosition.toString() ,Toast.LENGTH_SHORT).show()
 
         intent.putExtra("Select_Position",selectPosition)
         intent.putParcelableArrayListExtra("images_list", ArrayList<Image>(item))
-
-        ActivityCompat.startActivity(requireContext(), intent, activityOption.toBundle())
-
-
-    }
+        return intent }
 
 
     override fun onResume() {

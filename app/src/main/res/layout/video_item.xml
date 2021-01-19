@@ -6,21 +6,23 @@
         class="VideoItemDataBinding">
 
         <variable
-            name="uri"
-            type="android.net.Uri" />
+            name="video"
+            type="image.crystalapps.contentprovidersample.entities.Video" />
+
+        <import type="image.crystalapps.contentprovidersample.common.MediaUtils"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/decoration_space"
         android:layout_height="170dp">
 
         <ImageView
             android:id="@+id/singleImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:scaleType="fitXY"
+            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -32,14 +34,12 @@
             android:id="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/timer_style"
-            android:drawableStart="@drawable/play_icon"
-            android:paddingStart="12dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="5dp"
-            android:text="6:12"
+            android:textAlignment="center"
+            android:padding="@dimen/timer_size"
+            android:text="@{MediaUtils.INSTANCE.durationFormat(video.duration)}"
             android:textColor="@color/white"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"

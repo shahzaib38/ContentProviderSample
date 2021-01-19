@@ -38,7 +38,14 @@ class MainActivity : BaseActivity<MainViewModel, MainActivityDataBinding>() ,OnI
 //        toolbar.title = resources.getString(R.string.images)
 //        setSupportActionBar(toolbar)
 
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+//        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.statusBarColor=resources.getColor(R.color.white,null)
+
+
         setupBottomNavigationBar() }
 
     fun log(msg: String) = println("[${Thread.currentThread().name}] $msg")
@@ -61,7 +68,7 @@ class MainActivity : BaseActivity<MainViewModel, MainActivityDataBinding>() ,OnI
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 //        val navGraphIds = listOf(R.navigation.photo_nav, R.navigation.albums_nav ,R.navigation.video_nav)
-        val navGraphIds = listOf(R.navigation.photo_nav ,R.navigation.video_nav)
+        val navGraphIds = listOf(R.navigation.photo_nav ,R.navigation.video_nav ,R.navigation.settings_nav)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

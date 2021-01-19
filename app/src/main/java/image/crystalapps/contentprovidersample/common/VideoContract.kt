@@ -12,4 +12,14 @@ object VideoContract {
     const val SIZE= MediaStore.Video.Media.SIZE
     const val WIDTH= MediaStore.Video.Media.WIDTH
     const val HEIGHT = MediaStore.Video.Media.HEIGHT
-    const val PATH = MediaStore.Video.Media.BUCKET_DISPLAY_NAME }
+    const val PATH = MediaStore.Video.Media.BUCKET_DISPLAY_NAME
+    const val DURATION = MediaStore.Video.Media.DURATION
+
+
+
+    fun getVideoList() :Array<String> = arrayOf(DISLAY_NAME,_ID, DATE, SIZE, WIDTH, HEIGHT, PATH,
+        DURATION)
+
+
+
+}

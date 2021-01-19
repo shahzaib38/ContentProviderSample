@@ -9,7 +9,7 @@ import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.ui.mainactivity.MainActivity
 import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.databinding.PatternDataBinding
-import image.crystalapps.contentprovidersample.pattercallbacks.OnPatternSetUpCallBacks
+import image.crystalapps.contentprovidersample.pattercallbacks.OnPatternSetUp
 import image.crystalapps.contentprovidersample.pattercallbacks.PatternCallBacks
 import image.crystalapps.contentprovidersample.ui.base.BaseActivity
 
@@ -48,7 +48,7 @@ class PatternActivity :BaseActivity<PatternViewModel , PatternDataBinding>() {
     private fun setUpPattern(){
         patternDataBinding?.apply {
             this.patternView.addPatternLockListener(
-                PatternCallBacks.getInstance(patternView, object : OnPatternSetUpCallBacks() {
+                PatternCallBacks.getInstance(patternView, object : OnPatternSetUp() {
                     override fun onCorrect() {
                         viewModelText(getResourceString(R.string.correct_pattern))
                         val intent  = Intent(this@PatternActivity ,

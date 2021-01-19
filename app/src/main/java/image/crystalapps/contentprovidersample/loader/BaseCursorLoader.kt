@@ -9,10 +9,14 @@ class BaseCursorLoader(context :Context ,iLoader :ILoader) :CursorLoader(context
     init {
         projection = iLoader.getSelectProjection();
         uri = iLoader.getQueryUri();
-        selection = iLoader.getSelections();
-        selectionArgs = iLoader.getSelectionsArgs();
+        selection = iLoader.getSelections()
+        selectionArgs = iLoader.getSelectionsArgs()
         sortOrder = iLoader.getSortOrderSql();
+
     }
+
+
+
 
 
 }

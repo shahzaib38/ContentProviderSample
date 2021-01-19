@@ -24,7 +24,7 @@ class VideoLoader private constructor(private  val context :Context){
     lateinit var loaderCursor : Loader<Cursor>
     fun init(owner: VideosFragment){
         val loader = LoaderManagerCallBack(context, photoManager)
-        loaderCursor= LoaderManager.getInstance(owner).initLoader(VIDEO_LOADER, null, loader)
+        loaderCursor= LoaderManager.getInstance(owner).restartLoader(VIDEO_LOADER, null, loader)
 
     }
 
