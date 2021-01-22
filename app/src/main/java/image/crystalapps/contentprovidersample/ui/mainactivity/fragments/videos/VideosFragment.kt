@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
@@ -17,14 +18,16 @@ import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.adapter.VideoAdapter
 import image.crystalapps.contentprovidersample.databinding.VideosDataBinding
-import image.crystalapps.contentprovidersample.entities.Image
 import image.crystalapps.contentprovidersample.entities.Video
 import image.crystalapps.contentprovidersample.listerner.OnVideoItemClickListener
 import image.crystalapps.contentprovidersample.ui.base.BaseFragment
+import image.crystalapps.contentprovidersample.ui.mainactivity.MainActivity
 import image.crystalapps.contentprovidersample.ui.singleimage.SingleImageActivity
 import image.crystalapps.contentprovidersample.ui.singlevideo.SingleVideoPlayer
+import kotlinx.android.synthetic.main.material_toolbar.view.*
 import kotlinx.coroutines.launch
-import java.util.ArrayList
+import java.util.*
+
 
 @AndroidEntryPoint
 class VideosFragment :BaseFragment<VideosViewModel , VideosDataBinding>() ,OnVideoItemClickListener<List<Video>>{
@@ -39,15 +42,33 @@ class VideosFragment :BaseFragment<VideosViewModel , VideosDataBinding>() ,OnVid
 
     override fun getViewModel(): VideosViewModel = mViewModel
 
+    private var mMainActivity : MainActivity?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
        mVideoDataBinding = getViewDataBinding()
 
+        if(getBaseActivity() is MainActivity) {
+            mMainActivity = getBaseActivity() as MainActivity
+        }else{
+            throw ClassCastException("Login Dialog Fragment is null")
+        }
+
+//        setUpToolbar()
 
         loadDataFromStorage()
 
+    }
+
+
+    fun setUpToolbar(){
+
+        mVideoDataBinding?.mainToolbar?.run {
+            this.toolbar.title = resources.getString(R.string.videos)
+            mMainActivity?.setSupportActionBar(this as Toolbar)
+
+        }
     }
 
 

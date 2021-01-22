@@ -15,20 +15,29 @@ import image.crystalapps.contentprovidersample.ui.mainactivity.fragments.videos.
 
 val  diffUtilVideos =object : DiffUtil.ItemCallback<Video>() {
     override fun areItemsTheSame(oldItem: Video, newItem:Video): Boolean {
-        return false
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean {
 
-        return false
-    }
+        return oldItem.id == newItem.id }
 }
 
 
 class VideoAdapter(private val videosFragment : VideosFragment) :BaseAdapter<Video, VideoItemDataBinding>(diffUtilVideos){
     override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int
-    ): VideoItemDataBinding = DataBindingUtil.inflate(inflater , R.layout.video_item,parent ,false)
+    ): VideoItemDataBinding {
 
+    val binding =     DataBindingUtil.inflate<VideoItemDataBinding>(inflater, R.layout.video_item, parent, false)
+
+        binding.root.setOnClickListener {
+            val choosen=   binding.video
+            if(choosen!=null) {
+
+            } }
+
+        return binding
+    }
 
     override fun bind(binding: VideoItemDataBinding, item: Video,position:Int) {
 
@@ -38,10 +47,10 @@ class VideoAdapter(private val videosFragment : VideosFragment) :BaseAdapter<Vid
 
         Glide.with(binding.root).load(Uri.parse(item.uriImage)).into(binding.singleImageView)
 
-        binding.singleImageView.setOnClickListener {
-            videosFragment.clickItem(it ,currentList.toList(),position)
-
-        }
+//        binding.singleImageView.setOnClickListener {
+//            videosFragment.clickItem(it ,currentList.toList(),position)
+//
+//        }
     }
 
 

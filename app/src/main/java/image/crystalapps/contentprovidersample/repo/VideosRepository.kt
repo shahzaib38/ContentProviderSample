@@ -1,14 +1,14 @@
-package image.crystalapps.contentprovidersample.ui.mainactivity.fragments.videos
+package image.crystalapps.contentprovidersample.repo
 
 import android.content.Context
-import image.crystalapps.contentprovidersample.PhotoLoader
 import image.crystalapps.contentprovidersample.VideoLoader
-import image.crystalapps.contentprovidersample.ui.base.BaseRepository
+import image.crystalapps.contentprovidersample.repo.BaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class VideosRepository @Inject constructor():BaseRepository() {
+class VideosRepository @Inject constructor():
+    BaseRepository() {
 
 
 

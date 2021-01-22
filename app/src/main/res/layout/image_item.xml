@@ -6,16 +6,17 @@
         class="ImageItemDataBinding">
 
         <variable
-            name="uri"
-            type="android.net.Uri" />
+            name="image"
+            type="image.crystalapps.contentprovidersample.entities.Image" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/main"
         android:layout_margin="2dp"
         android:layout_height="170dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/singleImageView"
             android:scaleType="center"
             android:layout_width="0dp"
@@ -24,5 +25,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

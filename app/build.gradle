@@ -77,6 +77,15 @@ dependencies {
     // Lifecycles only (without ViewModel or LiveData)
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+
+
+
+
+
+
+
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
@@ -93,6 +102,13 @@ dependencies {
 
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+
+    def lifecycle_version1 = "2.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version1"
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01'
+
+
 
     // Pattern LockView
     implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'

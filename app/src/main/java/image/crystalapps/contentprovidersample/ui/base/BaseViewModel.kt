@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
+import image.crystalapps.contentprovidersample.repo.BaseRepository
 import java.lang.ref.WeakReference
 
 

@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
@@ -33,6 +34,7 @@ import image.crystalapps.contentprovidersample.ui.base.BaseFragment
 import image.crystalapps.contentprovidersample.ui.mainactivity.MainActivity
 import image.crystalapps.contentprovidersample.ui.mainactivity.MainViewModel
 import image.crystalapps.contentprovidersample.ui.singleimage.SingleImageActivity
+import kotlinx.android.synthetic.main.material_toolbar.view.*
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
@@ -43,6 +45,7 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
 
     private val mViewModel by viewModels<PhotoViewModel>()
      private  var mPhotoDataBinding :PhotoDataBinding?=null
+    private var mMainActivity : MainActivity?=null
 
     override fun getBindingVariable(): Int =BR.viewModel
 
@@ -63,13 +66,26 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
      mPhotoDataBinding =    getViewDataBinding()
 
 
-    val window=    requireActivity().window
+        if(getBaseActivity() is MainActivity) {
+            mMainActivity = getBaseActivity() as MainActivity
+        }else{
+            throw ClassCastException("Login Dialog Fragment is null")
+        }
+
+        val window=    requireActivity().window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.statusBarColor=resources.getColor(R.color.white,null)
 
         if (Permissions.hasPermissions(requireContext(), EXTERNAL_STORAGE_ARRAY))
         { loadDataFromStorage() }
         else{ requestCameraPermission() }
+
+
+
+
+    //    setUpToolbar()
+
+
 
 
     }
@@ -79,7 +95,14 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
                 ?:arrayOf(Manifest.permission.CAMERA),
             EXTERNAL_STORAGE_PERMISSION
         ) }
+    fun setUpToolbar(){
 
+        mPhotoDataBinding?.mainToolbar?.run {
+            this.toolbar.title = resources.getString(R.string.pictures)
+            mMainActivity?.setSupportActionBar(this as Toolbar)
+
+        }
+    }
 
     private   fun loadDataFromStorage(){
 
@@ -89,6 +112,7 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
             photoProvider.photosLiveData.observe(viewLifecycleOwner, Observer { result ->
 
                 val imageAdapter = ImageAdapter(this@PhotoFragment)
+
                 if (result!=null && result.isNotEmpty()  ) {
                     imageAdapter.submitList(result)
 
@@ -97,7 +121,12 @@ class PhotoFragment  : BaseFragment<PhotoViewModel , PhotoDataBinding>() ,
 
                         this.layoutManager = GridLayoutManager(requireContext(), 2)
                         this.adapter = imageAdapter
-                        this.isNestedScrollingEnabled = false } } }) }
+                        this.isNestedScrollingEnabled = false } }
+
+
+            })
+
+        }
     }
 
 

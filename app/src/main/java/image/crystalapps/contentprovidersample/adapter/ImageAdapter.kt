@@ -1,47 +1,48 @@
 package image.crystalapps.contentprovidersample.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.Glide
-import image.crystalapps.contentprovidersample.ui.mainactivity.MainActivity
 import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.databinding.ImageItemDataBinding
 import image.crystalapps.contentprovidersample.entities.Image
-import image.crystalapps.contentprovidersample.ui.mainactivity.fragments.photo.PhotoFragment
-import kotlinx.android.synthetic.main.video_item.view.*
+import image.crystalapps.contentprovidersample.listerner.OnPhotoItemClickListener
 
 
 val  diffUtil =object : DiffUtil.ItemCallback<Image>() {
     override fun areItemsTheSame(oldItem: Image, newItem: Image): Boolean {
-        return false
-    }
+        return oldItem == newItem }
 
     override fun areContentsTheSame(oldItem: Image , newItem: Image): Boolean {
-
-        return false
-    }
+        return oldItem.id==newItem.id }
 }
 
 
-class ImageAdapter(private val photoFragment : PhotoFragment) :BaseAdapter<Image, ImageItemDataBinding>(diffUtil){
-    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int
-    ): ImageItemDataBinding= DataBindingUtil.inflate(inflater , R.layout.image_item,parent ,false)
+class ImageAdapter(private val onPhotoClickListener :OnPhotoItemClickListener<List<Image>>) :BaseAdapter<Image, ImageItemDataBinding>(diffUtil){
 
+    override fun createBinding(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): ImageItemDataBinding
+    {
+        val binding=    DataBindingUtil.inflate<ImageItemDataBinding>(inflater, R.layout.image_item, parent, false)
+
+        binding.root.setOnClickListener {
+          val choosen=   binding.image
+           if(choosen!=null) {
+
+         //      onPhotoClickListener.clickItem(it.context ,it)
+           }
+        }
+        return binding }
 
     override fun bind(binding: ImageItemDataBinding, item: Image ,position :Int) {
-    Glide.with(binding.root).load(Uri.parse(item.uriImage)).into(binding.singleImageView)
-
-        binding.singleImageView.setOnClickListener {
-            photoFragment.clickItem(it ,currentList.toList(),position )
+        binding.singleImageView.apply {
+            binding.image = item
 
         }
     }
 
     override fun onDataChanged(values: Boolean) {
 
-
     }
+
 }

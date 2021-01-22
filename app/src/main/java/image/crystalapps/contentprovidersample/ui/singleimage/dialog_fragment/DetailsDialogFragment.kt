@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.R
 import image.crystalapps.contentprovidersample.databinding.DetailDataBinding
+import image.crystalapps.contentprovidersample.entities.Details
 import image.crystalapps.contentprovidersample.ui.base.BaseDialogFragment
 
 @AndroidEntryPoint
@@ -17,10 +18,17 @@ class DetailsDialogFragment :BaseDialogFragment<DetailViewModel , DetailDataBind
 
     companion object{
         private const val TAG :String= "DetailsDialogFragment"
-        private const val   RC_SIGN_IN = 9125
-        fun getInstance(): DetailsDialogFragment {
-            return DetailsDialogFragment()
-        }
+        private const val DETAILS = "DETAILS"
+
+        fun getInstance(details  : Details): DetailsDialogFragment {
+            val fragmentDialog = DetailsDialogFragment()
+            val bundle = Bundle()
+            bundle.putParcelable(DETAILS, details)
+            fragmentDialog.arguments = bundle
+            return fragmentDialog }
+
+
+
     }
 
 
@@ -39,7 +47,14 @@ class DetailsDialogFragment :BaseDialogFragment<DetailViewModel , DetailDataBind
 
          mDetailDataBinding = getViewDataBinding()
 
+        val arguments = arguments?.run {
+            this.getParcelable<Details>(DETAILS)
+        }?: throw NullPointerException("Not parcelable")
 
+        mDetailDataBinding?.apply {
+
+            this.details =arguments
+        }
 
 
 

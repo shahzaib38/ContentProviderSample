@@ -1,9 +1,7 @@
 package image.crystalapps.contentprovidersample
 
-import android.app.Activity
 import android.content.Context
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader

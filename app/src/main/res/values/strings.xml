@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Private Gallery</string>
     <string name="draw_pattern">Draw unlock pattern</string>
     <string name="correct_pattern">Unlocked</string>
@@ -18,6 +19,11 @@
     <string name="speak_now">Speak Now</string>
     <string name="pictures">Pictures</string>
     <string name="description">Security type</string>
+    <string name="date">Date \t </string>
+    <string name="title">Title</string>
+    <string name="status">Status</string>
+    <string name="lock_title">Lock Screen</string>
+
 </resources>
 
 

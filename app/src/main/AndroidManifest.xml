@@ -31,10 +31,6 @@
             android:name=".ui.mainactivity.MainActivity"
             android:theme="@style/AppTheme">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".ui.pinlock.PinLock">
@@ -45,6 +41,10 @@
 
         <activity android:name=".ui.lock.LockActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 

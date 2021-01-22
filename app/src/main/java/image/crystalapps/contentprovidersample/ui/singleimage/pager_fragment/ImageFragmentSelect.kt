@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import image.crystalapps.contentprovidersample.BR
 import image.crystalapps.contentprovidersample.R
+import image.crystalapps.contentprovidersample.common.DetailsUtils
 import image.crystalapps.contentprovidersample.databinding.ImageSelectDataBinding
+import image.crystalapps.contentprovidersample.entities.Details
 import image.crystalapps.contentprovidersample.entities.Image
 import image.crystalapps.contentprovidersample.ui.base.BaseFragment
 import image.crystalapps.contentprovidersample.ui.singleimage.SingleImageActivity
@@ -26,7 +28,7 @@ class ImageFragmentSelect : BaseFragment<SingleViewModel, ImageSelectDataBinding
 
         private const val IMAGE = "image"
         private var imageSelectDataBinding : ImageSelectDataBinding?=null
-
+        private  var    images:Image?=null
         fun newInstance(image: Image?): ImageFragmentSelect {
             val fragment = ImageFragmentSelect()
             val args = Bundle()
@@ -43,7 +45,7 @@ class ImageFragmentSelect : BaseFragment<SingleViewModel, ImageSelectDataBinding
         super.onViewCreated(view, savedInstanceState)
 
         imageSelectDataBinding = getViewDataBinding()
-        val images=      arguments?.let { it.getParcelable<Image>(IMAGE) }
+          images=      arguments?.let { it.getParcelable<Image>(IMAGE) }
 
         imageSelectDataBinding?.imagedata?.setImageURI(Uri.parse(images?.uriImage))
 
@@ -78,16 +80,22 @@ class ImageFragmentSelect : BaseFragment<SingleViewModel, ImageSelectDataBinding
 
 
     private fun openDetailsDialogFragment(){
-
-        DetailsDialogFragment.getInstance().showDialog(mSingleImageActivity.supportFragmentManager)
-
+      val details =  DetailsUtils.createDetailObject(images)
+        if(details!=null) {
+            DetailsDialogFragment.getInstance(details)
+                .showDialog(mSingleImageActivity.supportFragmentManager) }
     }
+
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId){
 
     R.id.details->{
     openDetailsDialogFragment()
-    true }
+
+
+        true }
 
     R.id.share-> {
 //    val product = intent.getStringExtra("parcel")
@@ -119,5 +127,23 @@ class ImageFragmentSelect : BaseFragment<SingleViewModel, ImageSelectDataBinding
 
 
     else-> false
+    }
+
+    override fun onPause() {
+        super.onPause()
+    println("OnPause Fra")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("onDestroy Frag")
+        images=null
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("onResume Frag")
+
     }
 }
